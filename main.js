@@ -1,136 +1,120 @@
-//Arreglos
-var arrayClave = {};
-var arrayDescripcion = {};
-var arrayExistencia = {};
-var arrayMinExistencia = {};
-var arrayPU = {};
+//Objeto
+var productos = {};
 
-const productos = parseInt(prompt("Escribe el numero de productos", ""));
+//Numero de productos
+const numProductos = parseInt(prompt("Escribe el numero de productos", ""));
 cargarProductos();
 
+//Menú
 do{
     var opcion = parseInt(prompt("Escoge la opcion del menú:\n1.Venta de un producto\n2.Reabastecimiento de un producto\n"
-    + "3.Actualizar el precio de un producto\n4.Informar sobre un producto\n5.Salir", ""))
+    + "3.Actualizar el precio de un producto\n4.Informar sobre un producto\n5.Salir", ""));
     switch(opcion){
         case 1:{
-            
+            var prodClave = parseInt(prompt("Ingrese la clave del producto a vender", productos[0].clave));
+            var prodCantidad = parseInt(prompt("Ingrese la cantidad vendida", "0"));
+            venderProductos();
+            break;
+        }
+        case 2:{
+            var prodClave = parseInt(prompt("Ingrese la clave del producto a restablecer", productos[0].clave));
+            var prodCantidad = parseInt(prompt("Ingrese el aumento de productos", "0"));
+            restablecerProductos();
+            break;
+        }
+        case 3:{
+            var prodClave = parseInt(prompt("Ingrese la clave del producto a actualizar", productos[0].clave));
+            var prodNuevoPrecio = parseInt(prompt("Ingrese el nuevo Precio", productos[0].precioUnitario));
+            actualizarProductos();
+            break;
+        }
+        case 4:{
+            var prodClave = parseInt(prompt("Ingresa la clave del producto a consultar", productos[0].clave));
+            informarProducto();
+        }
+        case 5:{
+            alert("Finalizando");
+            break;
+        }
+        default:{
+            alert("Opcion no disponible, intente de nuevo");
         }
     }
 }while(opcion!=5);
 
+//Funciones
 function cargarProductos(){
-    for(let i=0;i<productos;i++){
+    for(let i=0;i<numProductos;i++){
         alert("Producto "+ (i+1));
-        arrayClave[i] = parseInt(prompt("Clave", ""));
-        arrayDescripcion[i] = prompt("Descripción", "");
-        arrayExistencia[i] = parseInt(prompt("Existencia", ""));
-        arrayMinExistencia[i] = parseInt(prompt("Minimo a mantener existencia", ""));
-        arrayPU[i] = parseInt(prompt("Precio unitario", ""));
+        var clave = parseInt(prompt("Clave", ""));
+        var descripcion = prompt("Descripción", "");
+        var existencia = parseInt(prompt("Existencia", ""));
+        var minExistencia = parseInt(prompt("Minimo a mantener existencia", ""));
+        var precioUnitario = parseInt(prompt("Precio unitario", ""));
+
+        productos[i] = {
+            clave: clave,
+            descripcion: descripcion,
+            existencia: existencia,
+            minExistencia: minExistencia,
+            precioUnitario: precioUnitario
+        };
     };
 };
 
-/*
-        do {
-            System.out.println("Menu de Operaciones\n1.Venta de un producto\n2.Reabastecimiento de un producto\n"
-            + "3.Actualizar el precio de un producto\n4.Informar sobre un producto\n5.Salir");
-            opcion = tc.nextInt();
-            switch (opcion) {
-                case 1:
-                    System.out.print("Ingrese la clave del producto a vender: ");
-                    clave = tc.nextInt();
-                    System.out.print("Ingrese la cantidad vendida: ");
-                    cantidad = tc.nextInt();
-                    venderProductos(arrayClave, arrayExistencia, arrayMinExistencia, clave, cantidad, N, encontrado);
-                    break;
-                case 2:
-                    System.out.print("Ingrese la clave del producto a restablecer: ");
-                    clave = tc.nextInt();
-                    System.out.print("Ingrese el aumento de productos: ");
-                    cantidad=tc.nextInt();
-                    restablecerProductos(arrayClave, arrayExistencia, clave, cantidad, N, encontrado);
-                    break;
-                case 3:
-                    System.out.print("Ingrese la clave del producto a actualizar: ");
-                    clave = tc.nextInt();
-                    System.out.print("Ingrese el porcentaje de aumento de precio: ");
-                    porcentaje = tc.nextDouble();
-                    actualizarPrecio(arrayClave, arrayPU, clave, porcentaje, N, encontrado);
-                    break;
-                case 4:
-                    System.out.print("Ingrese la clave del producto a consultar: ");
-                    clave = tc.nextInt();
-                    informarProducto(arrayClave, arrayDescripcion, arrayExistencia, arrayMinExistencia, arrayPU, clave, N, encontrado);
-                    break;
-                case 5:
-                    System.out.println("Saliendo del programa");
-                    break;
-                default:
-                    System.out.println("Opcion no valida");
-                    break;
+function venderProductos(){
+    for(let i=0;i<numProductos;i++){
+        if(productos[i].clave==prodClave){
+            if((productos[i].existencia - prodCantidad) >= productos[i].minExistencia){
+                productos[i].existencia-=prodCantidad;
+                alert("Venta realizada con exito");
+            }else{
+                alert("No se puede realizar la venta. Existencia minima no mantenida");
             }
-        } while (opcion != 5);
+            var encontrado = true;
+        }
     }
+    if(!encontrado){
+        alert("Producto no encontrado")
+    }
+};
 
-    public static void venderProductos(int [] arrayClave, int [] arrayExistencia, int[] arrayMinExistencia, int clave, 
-    int cantidad, int N, boolean encontrado) {
-        for (int i = 0; i<N; i++) {
-            if (arrayClave[i] == clave) {
-                if ((arrayExistencia[i] - cantidad) >= arrayMinExistencia[i]) {
-                    arrayExistencia[i] -= cantidad;
-                    System.out.println("Venta realizada con exito");
-                } else {
-                    System.out.println("No se puede realizar la venta, existencia minima no mantenida");
-                }
-                encontrado =true;
-            }
-        }
-        if(!encontrado){
-            System.out.println("Producto no encontrado");
+function restablecerProductos(){
+    for(let i=0;i<numProductos;i++){
+        if(productos[i].clave==prodClave){
+            productos[i].existencia+=prodCantidad;
+            alert("Restablecimiento exitoso");
+            var encontrado=true;
         }
     }
-    
-    public static void restablecerProductos(int[] arrayClave, int [] arrayExistencia, int clave, int cantidad, 
-    int N, boolean encontrado){
-        for (int i = 0; i<N; i++) {
-            if (arrayClave[i] == clave) {
-                arrayExistencia[i]+=cantidad;
-                System.out.println("Restablecimiento exitoso");
-                encontrado=true;
-            }    
-        }
-        if(!encontrado){
-            System.out.println("Producto no encontrado");
+    if(!encontrado){
+        alert("Producto no encontrado");
+    }
+};
+
+function actualizarProductos(){
+    for(let i=0;i<numProductos;i++){
+        if(productos[i].clave==prodClave){
+            productos[i].precioUnitario = prodNuevoPrecio;
+            alert("Precio actualizado");
+            var encontrado=true;
         }
     }
-    
-    public static void actualizarPrecio(int [] arrayClave, double[] arrayPU, int clave, double porcentaje, 
-    int N, boolean encontrado){
-        for(int i=0;i<N;i++){
-            if(arrayClave[i] == clave){
-                arrayPU[i] = arrayPU[i]*(1+(porcentaje/100));
-                System.out.println("Precio actualizado");
-                encontrado = true;
-            }
-        }
-        if(!encontrado){
-            System.out.println("Producto no encontrado");
+    if(!encontrado){
+        alert("Producto no encontrado")
+    }
+}
+
+function informarProducto(){
+    for(let i=0;i<numProductos;i++){
+        if(productos[i].clave==prodClave){
+            alert("Clave: "+productos[i].clave+"\nDescripcion: "+productos[i].descripcion+
+            "\nExistencia: "+productos[i].existencia+"\nMinimo a mantener en existencia: "+productos[i].minExistencia+
+            "\nPrecio Unitario: "+productos[i].precioUnitario);
+            var encontrado = true;
         }
     }
-    
-    public static void informarProducto(int [] arrayClave, String[] arrayDescripcion, int [] arrayExistencia, 
-    int [] arrayMinExistencia, double [] arrayPU, int clave, int N, boolean encontrado){
-        for(int i=0;i<N;i++){
-            if(arrayClave[i]==clave){
-                System.out.println("Clave: "+arrayClave[i]);
-                System.out.println("Descripcion: "+arrayDescripcion[i]);
-                System.out.println("Existencia: "+arrayExistencia[i]);
-                System.out.println("Minimo a mantener en existencia: "+arrayMinExistencia[i]);
-                System.out.println("Precio unitario: "+arrayPU[i]);
-                encontrado = true;
-            }
-        }
-        if(!encontrado){
-            System.out.println("Producto no encontrado");
-        }
+    if(!encontrado){
+        alert("Producto no encontrado");
     }
-}*/
+}
