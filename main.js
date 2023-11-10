@@ -2,13 +2,13 @@
 var productos = {};
 
 //Numero de productos
-const numProductos = parseInt(prompt("Escribe el numero de productos", ""));
+const numProductos = parseInt(prompt("Escribe el numero de productos", "1"));
 cargarProductos();
 
 //Menú
 do{
     var opcion = parseInt(prompt("Escoge la opcion del menú:\n1.Venta de un producto\n2.Reabastecimiento de un producto\n"
-    + "3.Actualizar el precio de un producto\n4.Informar sobre un producto\n5.Salir", ""));
+    + "3.Actualizar el precio de un producto\n4.Informar sobre un producto\n5.Salir", "1"));
     switch(opcion){
         case 1:{
             var prodClave = parseInt(prompt("Ingrese la clave del producto a vender", productos[0].clave));
