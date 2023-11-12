@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de Productos</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <section class="productos">
+        <div class="agregar">
+            <h2>Agregar Productos</h2>
+            <form action="">
+                <div class="clave">
+                    <label for="nombre">Clave: </label>
+                    <input type="number" name="nombre" id="nombre">
+                </div>
+                <div class="nombre">
+                    <label for="">Nombre: </label>
+                    <input type="text" name="" id="">
+                </div>
+                <div class="existencia">
+                    <label for="">Existencia: </label>
+                    <input type="number" name="" id="">
+                </div>
+                <div class="minimo">
+                    <label for="">Minimo a mantener en existencia: </label>
+                    <input type="number">
+                </div>
+                <div class="unidad">
+                    <label for="">Precio por unidad:</label>
+                    <input type="number">
+                </div>
+                <input type="button" value="Enviar">
+            </form>
+        </div>
+        <div class="lista">
+            <h2>Lista de Productos agregados:</h2>
+            <div class="agregados"></div>
+        </div>
+    </section>
+
+    <div class="menu">
+        <h2>Menu de opciones</h2>
+        <button>1.Vender Productos</button>
+        <div class="vender">
+            <form action="">
+                <div class="clave">
+                    <label for="">Clave del producto:</label>
+                    <input type="number">
+                </div>
+                <div class="cantidad">
+                    <label for="">Cantidad vendida:</label>
+                    <input type="number" name="" id="">
+                </div>
+                <input type="button" value="Enviar">
+            </form>
+            <div class="info"></div>
+        </div>
+        <button>2.Restablecer productos</button>
+        <div class="restablecer">
+            <form action="">
+                <div class="clave">
+                    <label for="">Clave del producto: </label>
+                    <input type="number" name="" id="">
+                </div>
+                <div class="aumento">
+                    <label for="">Cantidad de productos agregados: </label>
+                    <input type="number">
+                </div>
+                <input type="button" value="Enviar">
+            </form>
+            <div class="info"></div>
+        </div>
+        <button>3.Actualizar precio</button>
+        <div class="actualizar">
+            <form action="">
+                <div class="clave">
+                    <label for="">Clave del producto: </label>
+                    <input type="number" name="" id="">
+                </div>
+                <div class="precio">
+                    <label for="">Nuevo precio: </label>
+                    <input type="number" name="" id="">
+                </div>
+                <input type="button" value="Enviar">
+            </form>
+            <div class="info"></div>
+        </div>
+        <button>4.Informacion del producto</button>
+        <div class="informacion">
+            <form action="">
+                <div class="clave">
+                    <label for="">Clave del producto: </label>
+                    <input type="number" name="" id="">
+                </div>
+                <input type="button" value="Enviar">
+            </form>
+            <div class="info"></div>
+        </div>
+    </div>
+
+<!--⢀⡴⠑⡄⠀⠀⠀⠀ ⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠸⡇⠀⠿⡀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆ 
+⠀⠀⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿ 
+⠀⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀ 
+⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+⠀⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠀⠀⠀⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉ 
+-->
+
+    <!--<script src="index3.js"></script>-->
+    <!-- <script src="main.js"></script> -->
+    <script src="interaccion.js"></script>
+</body>
+</html>
